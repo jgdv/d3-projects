@@ -1,0 +1,61 @@
+.state{
+	fill: none;
+	stroke: #a9a9a9;
+	stroke-width: 1;
+}
+.state:hover {
+	fill-opacity: 0.5;
+}
+svg {
+	margin-left: 10px;
+}
+#tooltip {   
+	position: absolute;           
+	text-align: center;
+	padding: 20px;             
+	margin: 10px;
+	font: 12px sans-serif;        
+	background: lightsteelblue;   
+	border: 1px;      
+	border-radius: 2px;           
+	pointer-events: none;         
+}
+#tooltip h4 {
+	margin: 0;
+	font-size: 14px;
+}
+#tooltip {
+	background: rgba(0,0,0,0.9);
+	border: 1px solid grey;
+	border-radius: 5px;
+	font-size: 12px;
+	width: auto;
+	padding: 4px;
+	color: white;
+	opacity: 0;
+}
+#tooltip table {
+	table-layout:fixed;
+}
+#tooltip tr td {
+	padding: 0;
+	margin: 0;
+}
+#tooltip tr td:nth-child(1) {
+	width: 50px;
+}
+#tooltip tr td:nth-child(2) {
+	text-align: center;
+}
+#slider {
+	width: 960px;
+	margin-left: 10px;
+}
+#custom-handle {
+	width: 3em;
+	height: 1.6em;
+	top: 50%;
+	margin-top: -.8em;
+	text-align: center;
+	line-height: 1.6em;
+}

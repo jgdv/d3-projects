@@ -2,7 +2,7 @@ window.onload = function() {
   // Source: https://bl.ocks.org/alandunning/cfb7dcd7951826b9eacd54f0647f48d3
 
   var svg = d3.select("svg"),
-    margin = {top: 20, right: 20, bottom: 30, left: 40},
+    margin = {top: 30, right: 100, bottom: 30, left: 40},
     width = +svg.attr("width") - margin.left - margin.right,
     height = +svg.attr("height") - margin.top - margin.bottom;
 
@@ -67,9 +67,26 @@ window.onload = function() {
     focus.append("circle")
         .attr("r", 7.5);
 
+    focus.append("rect")
+        .attr("x", "-1em")
+        .attr("y", "-2em")
+        .attr("width", "70px")
+        .attr("height", "20px")
+        .attr("fill", "grey");
+    
     focus.append("text")
         .attr("x", "-.75em")
-      	.attr("dy", "-.65em");
+        .attr("dy", "-1em");
+
+    /*focus.append("line")
+        .attr("class", "x-hover-line hover-line")
+        .attr("y1", 0)
+        .attr("y2", height);
+
+    focus.append("line")
+        .attr("class", "y-hover-line hover-line")
+        .attr("x1", width)
+        .attr("x2", width);*/
 
     svg.append("rect")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
@@ -87,7 +104,7 @@ window.onload = function() {
           d1 = data[i],
           d = x0 - d0.year > d1.year - x0 ? d1 : d0;
       focus.attr("transform", "translate(" + x(d.year) + "," + y(d.value) + ")");
-      focus.select("text").text(function() { return d.value; });
+      focus.select("text").text(function() { return (1900 + d.year.getYear()) + ": " + d.value; });
       focus.select(".x-hover-line").attr("y2", height - y(d.value));
       focus.select(".y-hover-line").attr("x2", width + width);
     }
@@ -123,7 +140,7 @@ window.onload = function() {
             d = x0 - d0.year > d1.year - x0 ? d1 : d0;
 
         focus.attr("transform", "translate(" + x(d.year) + "," + y(d.value) + ")");
-        focus.select("text").text(function() { return d.value; });
+        focus.select("text").text(function() { return (1900 + d.year.getYear()) + ": " + d.value; });
         focus.select(".x-hover-line").attr("y2", height - y(d.value));
         focus.select(".y-hover-line").attr("x2", width + width);
       }
@@ -135,27 +152,26 @@ window.onload = function() {
       // Select the section we want to apply our changes to
       var svg = d3.select("svg").transition();
 
+      var newColor = (lineName === "num" ? "#6F257F" : (lineName === "rep" ? "red" : "yellow"));
+
       // Make the changes
       svg.select(".line")   // change the line
           .duration(750)
           .attr("d", line(data))
           .attr("stroke", function() {
-            if (lineName === "num") {
-              return "#6F257F";
-            } else if (lineName === "rep") {
-              return "red";
-            } else if (lineName === "sen") {
-              return "yellow";
-            }
-          });;
+            return newColor;
+          });
       svg.select(".axis--x") // change the x axis
           .duration(750)
           .call(d3.axisBottom(x));
       svg.select(".axis--y") // change the y axis
           .duration(750)
           .call(d3.axisLeft(y));
+      svg.select("circle")
+          .duration(750)
+          .style("stroke", newColor);
 
-      d3.select("rect")
+      d3.select(".overlay")
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
           .attr("class", "overlay")
           .attr("width", width)
