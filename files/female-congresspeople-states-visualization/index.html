@@ -19,7 +19,25 @@
   	<div id="slider">
   	  <div id="custom-handle" class="ui-slider-handle"></div>
 	</div>
+	<div id="buttons" class="btn-group">
+	  <button id="all">Total</button>
+	  <button id="sen">Senators</button>
+	  <button id="rep">Representatives</button>
+	</div>
     <div id="tooltip"></div><!-- div to hold tooltip. -->
-    <svg width="960" height="600" id="statesvg"></svg> <!-- svg to hold the map. -->
+    <svg width="960" height="600" id="statesvg">
+      <div id="info">
+      	<table id="senTable">
+      	  <tr class="senR">
+      	    <th class="senHead">Senator(s)</th>
+      	  </tr>
+      	</table>
+      	<table id="repTable">
+      	  <tr class="repR">
+      	  	<th class="repHead">Representative(s)</th>
+      	  </tr>
+      	</table>
+      </div>
+    </svg> <!-- svg to hold the map. -->
   </body>
 </html>
